@@ -21,19 +21,26 @@ public abstract class LinearClassifier {
     }
 
     /**
-     * Initialize weights randomly between -0.5 and 0.5
+     * Initialize weights randomly between -1.0 and 1.0 for better range
      */
     protected void initializeWeights() {
         for (int i = 0; i < weights.length; i++) {
-            weights[i] = random.nextDouble() - 0.5;
+            weights[i] = (random.nextDouble() * 2.0) - 1.0;
         }
     }
 
     /**
-     * Step activation function Returns 1 if input >= 0, otherwise 0
+     * Step activation function Returns 1 if input > threshold, otherwise 0
      */
     protected int stepFunction(double input) {
-        return input >= 0 ? 1 : 0;
+        return input > getActivationThreshold() ? 1 : 0;
+    }
+
+    /**
+     * Get activation threshold - can be overridden by subclasses
+     */
+    protected double getActivationThreshold() {
+        return 0.0; // Default threshold
     }
 
     /**
