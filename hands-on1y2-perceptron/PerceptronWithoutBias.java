@@ -10,11 +10,6 @@ public class PerceptronWithoutBias extends LinearClassifier {
     }
 
     @Override
-    protected double getActivationThreshold() {
-        return 1.5; // Threshold for AND gate: both inputs must be active
-    }
-
-    @Override
     protected double calculateWeightedSum(double[] inputs) {
         double sum = 0.0;
         for (int i = 0; i < inputs.length; i++) {
@@ -103,40 +98,11 @@ public class PerceptronWithoutBias extends LinearClassifier {
         }
         System.out.println("Training completed. Best performance: " + bestCorrectCount + "/4 patterns correct");
 
-        // If still not perfect, try one final strategy with larger weights
+        // If still not perfect, acknowledge the mathematical limitation
         if (bestCorrectCount < 4) {
-            System.out.println("Attempting final optimization with larger weight magnitudes...");
-            tryLargerWeights(trainingInputs, expectedOutputs);
-        }
-    }
-
-    private void tryLargerWeights(double[][] trainingInputs, int[] expectedOutputs) {
-        // Try specific weight combinations that might work for AND
-        double[][] candidateWeights = {
-            {0.7, 0.7}, // Both positive, equal
-            {1.0, 1.0}, // Larger equal weights
-            {0.8, 0.6}, // Slightly different
-            {0.6, 0.8}, // Reverse
-            {1.2, 1.2}, // Even larger
-            {0.9, 0.9} // Another attempt
-        };
-
-        for (double[] candidate : candidateWeights) {
-            weights[0] = candidate[0];
-            weights[1] = candidate[1];
-
-            int correctCount = 0;
-            for (int i = 0; i < trainingInputs.length; i++) {
-                if (predict(trainingInputs[i]) == expectedOutputs[i]) {
-                    correctCount++;
-                }
-            }
-
-            if (correctCount == 4) {
-                System.out.println("Found working weights: w1=" + String.format("%.4f", weights[0])
-                        + ", w2=" + String.format("%.4f", weights[1]));
-                return;
-            }
+            System.out.println("Attempting to find best possible approximation...");
+            System.out.println("Note: Perfect AND classification without bias is mathematically challenging");
+            System.out.println("with standard Step function (x >= 0). Best effort achieved: " + bestCorrectCount + "/4");
         }
     }
 
@@ -145,7 +111,6 @@ public class PerceptronWithoutBias extends LinearClassifier {
         System.out.println("\n=== OPTIMAL PARAMETERS ===");
         System.out.println("w1 = " + String.format("%.4f", weights[0]));
         System.out.println("w2 = " + String.format("%.4f", weights[1]));
-        System.out.println("threshold = " + String.format("%.4f", getActivationThreshold()));
     }
 
     @Override
@@ -162,7 +127,7 @@ public class PerceptronWithoutBias extends LinearClassifier {
             System.out.printf("Pattern [%.0f, %.0f]:\n", x1, x2);
             System.out.printf("  Weighted Sum = (%.4f * %.0f) + (%.4f * %.0f) = %.4f\n",
                     weights[0], x1, weights[1], x2, weightedSum);
-            System.out.printf("  Activation = %.4f > %.4f ? %d\n", weightedSum, getActivationThreshold(), output);
+            System.out.printf("  Step Function = step(%.4f) = %d (%.4f >= 0)\n", weightedSum, output, weightedSum);
             System.out.printf("  Expected: %d, Got: %d %s\n\n",
                     expectedOutputs[i], output,
                     expectedOutputs[i] == output ? "✓" : "✗");
