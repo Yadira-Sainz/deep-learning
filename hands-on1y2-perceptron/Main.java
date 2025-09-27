@@ -113,8 +113,7 @@ public class Main {
     }
 
     private static void testOrGate() {
-        System.out.println("TESTING OR GATE WITH PERCEPTRON (WITH BIAS)");
-        System.out.println("-".repeat(60));
+        // Training OR gate with perceptron (with bias) - silent mode
 
         // OR gate training data
         double[][] orInputs = {
@@ -129,7 +128,7 @@ public class Main {
         PerceptronWithBias orPerceptron = new PerceptronWithBias(2, 0.1, 1000);
         orPerceptron.train(orInputs, orExpected);
 
-        // Show results
+        // Show results - only what specifications require
         orPerceptron.printParameters();
         orPerceptron.showStepByStepCalculation(orInputs, orExpected);
     }
