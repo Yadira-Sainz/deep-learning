@@ -1,9 +1,9 @@
-
 import java.util.Random;
 
 /**
- * Abstract base class for Linear Classifiers Represents a perceptron with
- * common functionality
+ * Clase base abstracta para Clasificadores Lineales (Perceptrón).
+ * Proporciona funcionalidad común, inicialización de pesos aleatoria
+ * y la función de activación Step.
  */
 public abstract class LinearClassifier {
 
@@ -21,35 +21,38 @@ public abstract class LinearClassifier {
     }
 
     /**
-     * Initialize weights randomly between -1.0 and 1.0 for better range
+     * Inicializa los pesos de forma aleatoria entre -1.0 y 1.0, 
+     * cumpliendo con la especificación 3.b.
      */
     protected void initializeWeights() {
         for (int i = 0; i < weights.length; i++) {
+            // Inicializa los pesos con valores aleatorios entre -1.0 y 1.0
             weights[i] = (random.nextDouble() * 2.0) - 1.0;
         }
     }
 
     /**
-     * Step activation function Returns 1 if input > threshold, otherwise 0
+     * Función de activación Step (Escalón), cumpliendo con la especificación 3.a.
+     * Retorna 1 si input > umbral (0.0 por defecto), sino 0.
      */
     protected int stepFunction(double input) {
         return input > getActivationThreshold() ? 1 : 0;
     }
 
     /**
-     * Get activation threshold - can be overridden by subclasses
+     * Obtiene el umbral de activación. Por defecto 0.0.
      */
     protected double getActivationThreshold() {
-        return 0.0; // Default threshold
+        return 0.0; // Umbral por defecto
     }
 
     /**
-     * Calculate weighted sum of inputs
+     * Calcula la suma ponderada de las entradas.
      */
     protected abstract double calculateWeightedSum(double[] inputs);
 
     /**
-     * Predict output for given inputs
+     * Predice la salida para las entradas dadas.
      */
     public int predict(double[] inputs) {
         double weightedSum = calculateWeightedSum(inputs);
@@ -57,17 +60,18 @@ public abstract class LinearClassifier {
     }
 
     /**
-     * Train the perceptron with given training data
+     * Entrena el perceptrón con los datos de entrenamiento.
+     * @return true si el perceptrón convergió completamente, false si alcanzó maxEpochs.
      */
-    public abstract void train(double[][] trainingInputs, int[] expectedOutputs);
+    public abstract boolean train(double[][] trainingInputs, int[] expectedOutputs);
 
     /**
-     * Print weights and bias (if applicable)
+     * Imprime los parámetros óptimos (pesos y bias, si aplica).
      */
     public abstract void printParameters();
 
     /**
-     * Show step-by-step calculation for verification
+     * Muestra el cálculo paso a paso para la verificación (especificación 7.c).
      */
     public abstract void showStepByStepCalculation(double[][] inputs, int[] expectedOutputs);
 }
