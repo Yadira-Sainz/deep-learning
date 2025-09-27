@@ -79,9 +79,13 @@ public class PerceptronWithoutBias extends LinearClassifier {
 
     @Override
     public void printParameters() {
-        // Print ONLY what specifications require: optimal values of w1 and w2
+        // Print identifier and required parameters per specifications
+        System.out.println("=".repeat(60));
+        System.out.println("PERCEPTRON WITHOUT BIAS - AND GATE:");
+        System.out.println("=".repeat(60));
         System.out.println("w1 = " + String.format("%.4f", weights[0]));
         System.out.println("w2 = " + String.format("%.4f", weights[1]));
+        System.out.println(); // Line break after w2 to separate from patterns
     }
 
     @Override

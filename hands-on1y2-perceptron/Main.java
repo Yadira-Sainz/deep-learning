@@ -6,22 +6,17 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("=".repeat(60));
-        System.out.println("PERCEPTRON DEMONSTRATION");
-        System.out.println("=".repeat(60));
-
         // Test AND gate with PerceptronWithoutBias
         testAndGate();
 
-        System.out.println("\n" + "=".repeat(60));
+        System.out.println();
 
-        // Test OR gate with PerceptronWithBias
+        // Test OR gate with PerceptronWithBias  
         testOrGate();
     }
 
     private static void testAndGate() {
-        System.out.println("TESTING AND GATE WITH PERCEPTRON (NO BIAS)");
-        System.out.println("-".repeat(60));
+        // Training AND gate with perceptron (no bias) - silent mode
 
         // AND gate training data
         double[][] andInputs = {
@@ -68,21 +63,13 @@ public class Main {
 
             if (correctCount == 4) {
                 converged = true;
-                System.out.println("Perfect convergence achieved on attempt " + attempt + " (lr=" + lr + ", epochs=" + epochs + ")");
-            }
-
-            // Show progress every 1000 attempts
-            if (attempt % 1000 == 0) {
-                System.out.println("Progress: " + attempt + "/" + maxAttempts + " attempts, best so far: " + bestCount + "/4 patterns");
+                // Perfect convergence found - no message per specifications
+                break;
             }
         }
 
         // Use the best perceptron found
         andPerceptron = (bestPerceptron != null) ? bestPerceptron : andPerceptron;
-
-        if (!converged) {
-            System.out.println("Best result achieved after " + maxAttempts + " attempts (" + bestCount + "/4 patterns)");
-        }
 
         /*
         // MATHEMATICAL SOLUTION (COMMENTED OUT - FOR REFERENCE ONLY)
