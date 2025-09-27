@@ -32,8 +32,8 @@ public class Main {
         };
         int[] andExpected = {0, 0, 0, 1};
 
-        // Create and train perceptron with multiple restart strategy
-        PerceptronWithoutBias andPerceptron = new PerceptronWithoutBias(2, 0.2, 1000);
+        // Create and train advanced perceptron with multiple optimization techniques
+        PerceptronWithoutBias andPerceptron = new PerceptronWithoutBias(2, 0.1, 300);
         andPerceptron.train(andInputs, andExpected);
 
         // Show results
