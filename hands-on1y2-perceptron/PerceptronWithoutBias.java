@@ -90,7 +90,6 @@ public class PerceptronWithoutBias extends LinearClassifier {
 
     @Override
     public void showStepByStepCalculation(double[][] inputs, int[] expectedOutputs) {
-        // Print ONLY step-by-step calculations: Weighted Sum and Activation Function
         for (int i = 0; i < inputs.length; i++) {
             double x1 = inputs[i][0];
             double x2 = inputs[i][1];

@@ -21,8 +21,7 @@ public abstract class LinearClassifier {
     }
 
     /**
-     * Inicializa los pesos de forma aleatoria entre -1.0 y 1.0, 
-     * cumpliendo con la especificación 3.b.
+     * Inicializa los pesos de forma aleatoria entre -1.0 y 1.0
      */
     protected void initializeWeights() {
         for (int i = 0; i < weights.length; i++) {
@@ -32,7 +31,7 @@ public abstract class LinearClassifier {
     }
 
     /**
-     * Función de activación Step (Escalón), cumpliendo con la especificación 3.a.
+     * Función de activación Step (Escalón)
      * Retorna 1 si input > umbral (0.0 por defecto), sino 0.
      */
     protected int stepFunction(double input) {
@@ -71,7 +70,7 @@ public abstract class LinearClassifier {
     public abstract void printParameters();
 
     /**
-     * Muestra el cálculo paso a paso para la verificación (especificación 7.c).
+     * Muestra el cálculo paso a paso para la verificación.
      */
     public abstract void showStepByStepCalculation(double[][] inputs, int[] expectedOutputs);
 }
