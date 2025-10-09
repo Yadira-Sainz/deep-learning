@@ -58,7 +58,7 @@ LinearClassifier (Abstract)
 │   int[]): boolean         │ │ + printParameters(): void   │
 │ + printParameters(): void │ │ + showStepByStep            │
 │ + showStepByStep          │ │   Calculation(double[][],   │
-│   Calculation(double[][],  │ │   int[]): void              │
+│   Calculation(double[][], │ │   int[]): void              │
 │   int[]): void            │ └─────────────────────────────┘
 └───────────────────────────┘
 ```
